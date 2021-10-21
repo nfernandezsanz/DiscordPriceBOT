@@ -3,12 +3,13 @@
 <h2>Installation</h2>
 
 <ul>
-Include your Bots Tokens in the .env file. <br>
-Create as many instances of Bots as tokens you want to track.<br>
+<li>Include your Bots Tokens in the .env file.</li> <br>
+<li>Create as many instances of Bots as tokens you want to track.</li><br>
+<li>The Scripts was developed with Python 3.9.</li><br>  
 </ul>
 
 <h3>Install the dependencies with </h3>
 <ul>
-pip install pycoingecko<br>
-pip install discord<br>
+<li>pip install pycoingecko</li><br>
+<li>pip install discord</li><br>
 </ul>
