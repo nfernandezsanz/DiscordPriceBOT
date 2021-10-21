@@ -3,7 +3,7 @@
 <ul>
 <li>Nicolas Fernandez Sanz</li>
 </ul>
-<strong>This project was developed for GameStarter, any suggestion or contribution is welcome</strong>
+<strong>This project was developed for GameStarter Community, any suggestion or contribution is welcome!</strong>
 <h2>Installation</h2>
 <ul>
 <li>Create your BOTs in the <a href="https://discord.com/developers/applications">Discord Developer Portal</a></li>
