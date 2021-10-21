@@ -18,7 +18,7 @@ async def update_task(bot, coin):
     counter = 0
     while(True):
         counter += 1
-        data  = get_coin_status('gamestarter')
+        data  = get_coin_status(coin)
         emoji = "➡️"
 
         if(data['Change'] < 0):
@@ -33,14 +33,14 @@ async def update_task(bot, coin):
 async def on_ready():
     print(f'Logged in as {bot1.user} (ID: {bot1.user.id})')
     print('------')
-    bot1.loop.create_task(update_task(bot1, "coin"))
+    bot1.loop.create_task(update_task(bot1, "gamestarter"))
 
 
 @bot2.event
 async def on_ready():
     print(f'Logged in as {bot2.user} (ID: {bot2.user.id})')
     print('------')
-    await bot2.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="0 USD"))
+    bot2.loop.create_task(update_task(bot2, "dark-frontiers"))
 
 
 # Initialize Bots
