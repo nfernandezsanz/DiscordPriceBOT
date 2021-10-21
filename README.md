@@ -2,7 +2,7 @@
 <h2>Author</h2>
 <ul>
 <li>Nicolas Fernandez Sanz</li>
-<ul>
+</ul>
 This project was developed for GameStarter, any suggestion or contribution is welcome.
 <h2>Installation</h2>
 <ul>
