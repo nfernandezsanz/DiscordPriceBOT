@@ -1,18 +1,8 @@
 import asyncio
 import discord
-import os
-from discord.ext import commands
-from coins       import *
-from dotenv      import load_dotenv, find_dotenv
-
-bot1 = commands.Bot(command_prefix='#')
-bot2 = commands.Bot(command_prefix='$')
-
-#Config
-load_dotenv(find_dotenv())
-Token_1 = os.environ.get("Token_1")
-Token_2 = os.environ.get("Token_2")
-
+from discord.ext  import commands
+from coins        import *
+from config       import *
 
 async def update_task(bot, coin):
     counter = 0
@@ -27,30 +17,40 @@ async def update_task(bot, coin):
             emoji = "⏫"
 
         await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.playing, name= "$" + str(data['Price']) + " " + emoji + " " + str(data['Change']) + "%"))
-        await asyncio.sleep(10)
-
-@bot1.event
-async def on_ready():
-    print(f'Logged in as {bot1.user} (ID: {bot1.user.id})')
-    print('------')
-    bot1.loop.create_task(update_task(bot1, "gamestarter"))
+        await asyncio.sleep(60)
 
 
-@bot2.event
-async def on_ready():
-    print(f'Logged in as {bot2.user} (ID: {bot2.user.id})')
-    print('------')
-    bot2.loop.create_task(update_task(bot2, "dark-frontiers"))
+class Price_Tracker(commands.Bot):
+    
+    def __init__(self, command_prefix, self_bot, coin_id):
+        commands.Bot.__init__(self, command_prefix=command_prefix, self_bot=self_bot, coin_id=coin_id)
+        self.message1 = "[INFO]: Bot now online"
+        self.message2 = "Bot still online"
+        self.coin     = str(coin_id)
+    
+    async def on_ready(self):
+        print(f'Logged in as {self.user} (ID: {self.user.id})')
+        print('------')
+        self.loop.create_task(update_task(self, self.coin))
 
 
-# Initialize Bots
-loop  = asyncio.get_event_loop()
-task1 = loop.create_task(bot1.start(Token_1)) #GAME TOKEN BOT
-task2 = loop.create_task(bot2.start(Token_2)) #DARK TOKEN BOT
+bot_info_list  = read_bots()
+
+loop     = asyncio.get_event_loop()
+task     = list()
+bot_list = list()
+i        = 0
+
+for bot in bot_info_list:
+    bot_name   = list(bot.keys())[0]
+    bot_token  = bot[bot_name]
+    print("Initializing: " + bot_name + " ...")
+    #Create Bot
+    bot_list.append(Price_Tracker(command_prefix="!", self_bot=False, coin_id=bot_name))
+    task.append(loop.create_task(bot_list[i].start(bot_token))) 
+    i+=1
 
 try:
     loop.run_forever()
 finally:
     loop.stop()
-
-

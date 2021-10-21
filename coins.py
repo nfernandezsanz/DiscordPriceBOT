@@ -1,7 +1,7 @@
-from pycoingecko import CoinGeckoAPI
+from   pycoingecko import CoinGeckoAPI
 import requests
 import json
-from datetime import datetime
+
 
 cg = CoinGeckoAPI()
 
@@ -12,5 +12,3 @@ def get_coin_status(id):
     response['Change'] = round(api_result[id]['usd_24h_change'],2)
     response['Vol']    = round(api_result[id]['usd_24h_vol'],1)
     return response
-
-#print(get_coin_status('gamestarter'))
