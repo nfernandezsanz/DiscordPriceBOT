@@ -5,7 +5,7 @@ from   configparser import ConfigParser
 def read_bots():
     lista = list()
     config = ConfigParser() 
-    config.read('config.ini') 
+    config.read('config.env') 
     bots = config.sections();
     print ("I have " + str(len(bots)) + " bots")
 
