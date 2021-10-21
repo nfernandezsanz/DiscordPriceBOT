@@ -1,4 +1,4 @@
-# MultipleDiscordPricesBots
+# Discord PriceBOTs Trackers
 
 ## Installation
 Include your Bots Tokens in the .env file. <br>
