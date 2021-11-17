@@ -8,16 +8,20 @@ async def update_task(bot, coin):
     counter = 0
     while(True):
         counter += 1
-        data  = get_coin_status(coin)
-        emoji = "➡️"
+        try:
+            data  = get_coin_status(coin)
+            emoji = "➡️"
 
-        if(data['Change'] < 0):
-            emoji = "⏬"
-        elif(data['Change'] > 0):
-            emoji = "⏫"
+            if(data['Change'] < 0):
+                emoji = "⏬"
+            elif(data['Change'] > 0):
+                emoji = "⏫"
 
-        await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.playing, name= "$" + str(data['Price']) + " " + emoji + " " + str(data['Change']) + "%"))
-        await asyncio.sleep(60)
+            await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.playing, name= "$" + str(data['Price']) + " " + emoji + " " + str(data['Change']) + "%"))
+            await asyncio.sleep(180)
+
+        except:
+            print("Update error!")
 
 
 class Price_Tracker(commands.Bot):
@@ -25,7 +29,6 @@ class Price_Tracker(commands.Bot):
     def __init__(self, command_prefix, self_bot, coin_id):
         commands.Bot.__init__(self, command_prefix=command_prefix, self_bot=self_bot, coin_id=coin_id)
         self.message1 = "[INFO]: Bot now online"
-        self.message2 = "Bot still online"
         self.coin     = str(coin_id)
     
     async def on_ready(self):
