@@ -22,6 +22,7 @@ async def update_task(bot, coin):
 
         except:
             print("Update error!")
+            await asyncio.sleep(60)
 
 
 class Price_Tracker(commands.Bot):
